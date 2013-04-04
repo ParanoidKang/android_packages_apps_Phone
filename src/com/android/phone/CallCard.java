@@ -1415,6 +1415,8 @@ public class CallCard extends LinearLayout
         // updateSocialStatus(socialStatusText, socialStatusBadge, call);  // Currently unused
 
         // display Phone Location
+	if(TextUtils.isEmpty(info.phoneNumber))
+	        return;
         if(mContext.getResources().getConfiguration().locale.getCountry().equals("CN")||mContext.getResources().getConfiguration().locale.getCountry().equals("TW")) {
 	        String PhoneLocationStr=PhoneLocation.getCityFromPhone(info.phoneNumber, mContext);  		
 	        setLocationText(label, PhoneLocationStr);
