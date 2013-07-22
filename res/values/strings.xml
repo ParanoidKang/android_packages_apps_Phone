@@ -1559,6 +1559,4 @@
 
     <!-- Text for the onscreen "Blacklist" button -->
     <string name="onscreenBlacklistText">Blacklist</string>
-
-    <!-- CYANOGENMOD ADDITIONS END -->
 </resources>
