@@ -1385,7 +1385,31 @@ public class CallCard extends LinearLayout
         // Other text fields:
         updateCallTypeLabel(call);
         // updateSocialStatus(socialStatusText, socialStatusBadge, call);  // Currently unused
+        
+        // display Phone Location
+        if (TextUtils.isEmpty(info.phoneNumber))
+            return;
+        if (mContext.getResources().getConfiguration().locale.getCountry()
+                .equals("CN") || mContext.getResources().getConfiguration()
+                .locale.getCountry().equals("TW")) {
+            String PhoneLocationStr=PhoneLocation.getCityFromPhone(info.phoneNumber);      
+            setLocationText(label, PhoneLocationStr);
+        } else {
+            info.updateGeoDescription(mContext, info.phoneNumber);
+            setLocationText(label, info.geoDescription);
+        }
     }
+    
+    private void setLocationText(String label, String location) {
+        if (label != null && !TextUtils.isEmpty(location)) {
+            mLabel.setText(label + "  " +location);
+            mLabel.setVisibility(View.VISIBLE);  
+        } else if (!TextUtils.isEmpty(location)) {
+            mPhoneNumber.setText(location);
+            mPhoneNumber.setVisibility(View.VISIBLE);  
+        }
+     }
+        
 
     /**
      * Updates the info portion of the UI to be generic.  Used for CDMA 3-way calls.
