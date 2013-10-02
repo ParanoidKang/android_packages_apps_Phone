@@ -83,6 +83,12 @@
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.Settings$BlacklistSettingsActivity" />
+
+        <CheckBoxPreference
+            android:key="inaccurate_proximity"
+            android:title="@string/inaccurate_proximity_title"
+            android:summary="@string/inaccurate_proximity_summary" />
+
         </PreferenceScreen>
 
         <CheckBoxPreference

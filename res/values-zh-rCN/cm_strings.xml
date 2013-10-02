@@ -79,4 +79,7 @@
     <string name="voice_quality_entry_crisp">清脆</string>
     <string name="voice_quality_entry_bright">明亮</string>
     <string name="enter_input">USSD 信息必须要在 <xliff:g id="min_len" >%d</xliff:g> 与 <xliff:g id="max_len" >%d</xliff:g> 字符之间. 请重新尝试.</string>
+    
+    <string name="inaccurate_proximity_title">纠正感应器距离</string>
+    <string name="inaccurate_proximity_summary">强制在通话结束后打开屏幕，解决距离感应器不准确问题。</string>
 </resources>

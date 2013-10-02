@@ -255,6 +255,8 @@ public class CallFeaturesSetting extends PreferenceActivity
 
     // Blacklist support
     private static final String BUTTON_BLACKLIST = "button_blacklist";
+    
+    private static final String KEY_INACCURATE_PROXIMITY = "inaccurate_proximity";
 
     private EditPhoneNumberPreference mSubMenuVoicemailSettings;
 
@@ -293,6 +295,7 @@ public class CallFeaturesSetting extends PreferenceActivity
     private SipSharedPreferences mSipSharedPreferences;
     private ListPreference mFlipAction;
     private PreferenceScreen mButtonBlacklist;
+    private CheckBoxPreference mInaccurateProximityPref;
 
     private class VoiceMailProvider {
         public VoiceMailProvider(String name, Intent intent) {
@@ -628,6 +631,10 @@ public class CallFeaturesSetting extends PreferenceActivity
             updateFlipActionSummary((String) objValue);
         } else if (preference == mButtonVoiceQuality) {
             updateVoiceQualitySummary((String) objValue);
+        } else if (preference == mInaccurateProximityPref) {
+            Settings.System.putInt(mPhone.getContext().getContentResolver(),
+                    Settings.System.INACCURATE_PROXIMITY_WORKAROUND,
+                    ((Boolean) objValue).booleanValue() ? 1 : 0);
         }
         // always let the preference setting proceed.
         return true;
@@ -1751,6 +1758,13 @@ public class CallFeaturesSetting extends PreferenceActivity
 
         // Blacklist screen - Needed for setting summary
         mButtonBlacklist = (PreferenceScreen) prefSet.findPreference(BUTTON_BLACKLIST);
+        
+        mInaccurateProximityPref = (CheckBoxPreference) findPreference(KEY_INACCURATE_PROXIMITY);
+        if (mInaccurateProximityPref != null) {
+            mInaccurateProximityPref.setChecked(Settings.System.getInt(contentResolver,
+                    Settings.System.INACCURATE_PROXIMITY_WORKAROUND, 0) == 1);
+                    mInaccurateProximityPref.setOnPreferenceChangeListener(this);
+        }
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
